@@ -236,9 +236,9 @@ class WaveNet(nn.Module):
         # hvi = self.trans.HVIT(x)
         # x = hvi
 
-        illu_fea, illu_map = self.retinex(x)
-
-        x = x + x * illu_map
+        # illu_fea, illu_map = self.retinex(x)
+        #
+        # x = x + x * illu_map
 
         conv_1x = self.conv_1(x)
 
