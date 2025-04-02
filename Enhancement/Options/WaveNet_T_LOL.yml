@@ -12,7 +12,7 @@ datasets:
     name: TrainSet
     type: Dataset_PairedImage
     dataroot_gt: ~/lanyun-tmp/WaveNet/dataset/LOLdataset/our485/high/
-    dataroot_lq: ~/lanyun-tmp/WaveNet/dataset/our485/low/
+    dataroot_lq: ~/lanyun-tmp/WaveNet/dataset/LOLdataset/our485/low/
     geometric_augs: true
 
     filename_tmpl: '{}'
@@ -47,8 +47,8 @@ datasets:
   val:
     name: ValSet
     type: Dataset_PairedImage
-    dataroot_gt: ~/lanyun-tmp/WaveNet/dataset/eval15/high/
-    dataroot_lq: ~/lanyun-tmp/WaveNet/dataset/eval15/low/
+    dataroot_gt: ~/lanyun-tmp/WaveNet/dataset/LOLdataset/eval15/high/
+    dataroot_lq: ~/lanyun-tmp/WaveNet/dataset/LOLdataset/eval15/low/
     io_backend:
       type: disk
     val_crop: 
@@ -63,7 +63,7 @@ network_g:
 path:
   pretrain_network_g: ~
   strict_load_g: true
-  resume_state: 0
+  resume_state: ~
 
 # training settings
 train:

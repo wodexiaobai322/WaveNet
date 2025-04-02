@@ -172,20 +172,20 @@ def main():
         states = []
 
     resume_state = None
-    # if len(states) > 0:
-    #     max_state_file = '{}.state'.format(max([int(x[0:-6]) for x in states]))
-    #     # max_state_file='BEST_PSNR_23.15_SSIM_0.72.state'
-    #     resume_state = os.path.join(state_folder_path, max_state_file)
-    #     opt['path']['resume_state'] = resume_state
-    #
-    # # load resume states if necessary
-    # if opt['path'].get('resume_state'):
-    #     device_id = torch.cuda.current_device()
-    #     resume_state = torch.load(
-    #         opt['path']['resume_state'],
-    #         map_location=lambda storage, loc: storage.cuda(device_id))
-    # else:
-    #     resume_state = None
+    if len(states) > 0:
+        max_state_file = '{}.state'.format(max([int(x[0:-6]) for x in states]))
+        # max_state_file='BEST_PSNR_23.15_SSIM_0.72.state'
+        resume_state = os.path.join(state_folder_path, max_state_file)
+        opt['path']['resume_state'] = resume_state
+
+    # load resume states if necessary
+    if opt['path'].get('resume_state'):
+        device_id = torch.cuda.current_device()
+        resume_state = torch.load(
+            opt['path']['resume_state'],
+            map_location=lambda storage, loc: storage.cuda(device_id))
+    else:
+        resume_state = None
 
     # mkdir for experiments and logger
     if resume_state is None:
