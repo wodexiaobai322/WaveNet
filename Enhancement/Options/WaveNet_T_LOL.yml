@@ -11,8 +11,8 @@ datasets:
   train:
     name: TrainSet
     type: Dataset_PairedImage
-    dataroot_gt: ./dataset/LOLdataset/our485/high/
-    dataroot_lq: ./dataset/LOLdataset/our485/low/
+    dataroot_gt: ../dataset/LOLdataset/our485/high/
+    dataroot_lq: ../dataset/LOLdataset/our485/low/
     geometric_augs: true
 
     filename_tmpl: '{}'
