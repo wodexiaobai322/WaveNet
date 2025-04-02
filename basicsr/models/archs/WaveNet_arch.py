@@ -9,6 +9,7 @@ from timm.models.registry import register_model
 from models.archs.arch_util import LayerNorm,Mlp
 
 import torch.nn.functional as F
+from .hvi import RGB_HVI
       
 ##########################################################################
 ##---------- Adaptively Selective Feature Fusion (ASFF) ----------
@@ -199,6 +200,8 @@ class WaveNet(nn.Module):
         if self.use_asff:
             self.asff=ASFF(dec_dims[-1],height=2)
         self.conv_2=nn.Conv2d(dec_dims[-1],3,3,1,1,bias=bias)
+
+        self.trans = RGB_HVI()
     def forward_tokens(self, x):
         enc_maps = []
         for idx, block in enumerate(self.encoder):
@@ -220,6 +223,10 @@ class WaveNet(nn.Module):
         return x
 
     def forward(self, x):
+        # use hvi
+        hvi = self.trans.HVIT(x)
+        x = hvi
+
         conv_1x=self.conv_1(x)
 
         embed_x = self.forward_tokens(conv_1x)
@@ -229,7 +236,12 @@ class WaveNet(nn.Module):
         embed_x=self.conv_2(embed_x)
         
         x=embed_x+x
-        return x
+        # return x
+
+        out_rgb = self.trans.PHVIT(x)
+
+        return out_rgb
+
 
 @register_model
 def WaveNet_T(pretrained=False, **kwargs):
