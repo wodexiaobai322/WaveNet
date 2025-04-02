@@ -209,7 +209,7 @@ def main():
         logger.info(f"Resuming training from epoch: {resume_state['epoch']}, "
                     f"iter: {resume_state['iter']}.")
         start_epoch = resume_state['epoch']
-        current_iter = resume_state['iter']
+        current_iter = int(resume_state['iter'])
     else:
         model = create_model(opt)
         start_epoch = 0
